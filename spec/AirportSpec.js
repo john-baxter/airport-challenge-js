@@ -21,4 +21,32 @@ describe("Airport", function () {
     airport.takeOff(plane);
     expect(airport.planes()).toEqual([]);
   })
+
+  describe("airport hangar", function() {
+    it("can track the number of planes", function() {
+      for(count = 0; count < airport.capacity()-1; count++)
+        airport.land(new Plane);
+      var pre = airport.planes().length;
+      airport.land(new Plane);
+      expect(airport.planes().length).toEqual(pre + 1)
+    })
+      
+    it("can not exceed capacity by landing more planes", function() {
+      for(count = 0; count < airport.capacity(); count++)
+        airport.land(new Plane);
+    var pre = airport.planes().length;
+    airport.land(new Plane);
+    expect(airport.planes().length).toEqual(pre)
+    })  
+  })
+
+  it("should have a capacity when instantiated", function () {
+    expect(airport.capacity()).toBe(5)
+  })
+
+  it("should have a default capacity of 5 but be able to be set differently", function() {
+    bigAirport = new Airport(6)
+    expect(bigAirport.capacity()).toBe(6)
+  })
+
 })
