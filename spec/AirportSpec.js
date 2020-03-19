@@ -61,6 +61,11 @@ describe("Airport", function () {
       spyOn(airport._weather, 'isStormy').and.returnValue(true);
       expect(function(){airport.land(plane)}).toThrowError("The weather is stormy")
     })
+    it("prevents planes from taking off if the weather is stormy", function() {
+      spyOn(airport._weather, 'isStormy').and.returnValue(true);
+      expect(function(){airport.takeOff(plane)}).toThrowError("The weather is stormy")
+    })
+
   })
 
 
